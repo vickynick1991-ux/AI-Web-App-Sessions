@@ -2,53 +2,128 @@
 <html>
 
 <head>
-    <title>Simple Form</title>
+    <title>Police Form Report</title>
+
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+
+            var formData = new FormData(document.getElementById("myForm"));
+
+            fetch("https://script.google.com/macros/s/AKfycbwgiWM-ijnQV7lhBmzv7ILS516w-rjnY4NnZvIUlt0R8xHSwX4kGx72H_zvuyQhZHXS/exec", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.text())
+                .then(data => {
+                    alert("Data Submitted Successfully");
+                    document.getElementById("myForm").reset();
+                })
+                .catch(error => {
+                    alert("Submission Failed");
+                });
+        }
+
+        function updateData() {
+
+            var formData = new FormData(document.getElementById("myForm"));
+            formData.append("action", "update");
+
+            fetch("https://script.google.com/macros/s/AKfycbwgiWM-ijnQV7lhBmzv7ILS516w-rjnY4NnZvIUlt0R8xHSwX4kGx72H_zvuyQhZHXS/exec", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.text())
+                .then(data => {
+                    alert("Data Updated Successfully");
+                    document.getElementById("myForm").reset();
+                })
+                .catch(error => {
+                    alert("Update Failed");
+                });
+        }
+
+        function displayReport() {
+
+            document.getElementById("report").innerHTML =
+                "<h3>Processing... Please Wait</h3>";
+
+            fetch("https://script.google.com/macros/s/AKfycbwgiWM-ijnQV7lhBmzv7ILS516w-rjnY4NnZvIUlt0R8xHSwX4kGx72H_zvuyQhZHXS/exec")
+                .then(response => response.json())
+                .then(data => {
+
+                    var table = "<table border='1' cellpadding='10'>";
+                    table += "<tr><th>S.No</th><th>Name</th><th>PNO</th><th>Posting</th></tr>";
+
+                    for (var i = 0; i < data.length; i++) {
+                        table += "<tr>";
+                        table += "<td>" + (i + 1) + "</td>";
+                        table += "<td>" + data[i][0] + "</td>";
+                        table += "<td>" + data[i][1] + "</td>";
+                        table += "<td>" + data[i][2] + "</td>";
+                        table += "</tr>";
+                    }
+
+                    table += "</table>";
+
+                    document.getElementById("report").innerHTML = table;
+
+                });
+        }
+    </script>
+
 </head>
 
 <body>
 
-    <h2>Contact Form</h2>
+    <center>
 
-    <form action="#" method="post">
+        <h2>Police Posting Form</h2>
 
-        <!-- Name -->
-        <label for="name">Full Name:</label><br>
-        <input type="text" id="name" name="name" placeholder="Enter your name" required><br><br>
+        <form id="myForm" onsubmit="submitForm(event)">
 
-        <!-- Email -->
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required><br><br>
+            <table border="1" cellpadding="10">
 
-        <!-- Password -->
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br><br>
+                <tr>
+                    <td><b>Name:</b></td>
+                    <td><input type="text" name="name" required></td>
+                </tr>
 
-        <!-- Gender -->
-        <label>Gender:</label><br>
-        <input type="radio" name="gender" value="male"> Male
-        <input type="radio" name="gender" value="female"> Female<br><br>
+                <tr>
+                    <td><b>PNO:</b></td>
+                    <td><input type="number" name="pno" max="999999999" required></td>
+                </tr>
 
-        <!-- Hobbies -->
-        <label>Hobbies:</label><br>
-        <input type="checkbox" name="hobby" value="reading"> Reading
-        <input type="checkbox" name="hobby" value="sports"> Sports<br><br>
+                <tr>
+                    <td><b>Posting Police Station:</b></td>
+                    <td>
+                        <select name="posting" required>
+                            <option value="">Select</option>
+                            <option>Kotwali Nagar</option>
+                            <option>Cantt</option>
+                            <option>Mahila Thana</option>
+                        </select>
+                    </td>
+                </tr>
 
-        <!-- Dropdown -->
-        <label for="country">Country:</label><br>
-        <select id="country" name="country">
-            <option value="india">India</option>
-            <option value="usa">USA</option>
-            <option value="uk">UK</option>
-        </select><br><br>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="Submit">
+                        <input type="button" value="Update" onclick="updateData()">
+                        <input type="reset" value="Reset">
+                        <input type="button" value="Display Report" onclick="displayReport()">
+                    </td>
+                </tr>
 
-        <!-- Message -->
-        <label for="message">Message:</label><br>
-        <textarea id="message" name="message" rows="4" cols="30"></textarea><br><br>
+            </table>
 
-        <!-- Submit Button -->
-        <input type="submit" value="Submit">
+        </form>
 
-    </form>
+        <br><br>
+
+        <div id="report"></div>
+
+    </center>
 
 </body>
 
