@@ -2,128 +2,39 @@
 <html>
 
 <head>
-    <title>Police Form Report</title>
-
-    <script>
-        function submitForm(event) {
-            event.preventDefault();
-
-            var formData = new FormData(document.getElementById("myForm"));
-
-            fetch("https://script.google.com/macros/s/AKfycbwgiWM-ijnQV7lhBmzv7ILS516w-rjnY4NnZvIUlt0R8xHSwX4kGx72H_zvuyQhZHXS/exec", {
-                method: "POST",
-                body: formData
-            })
-                .then(response => response.text())
-                .then(data => {
-                    alert("Data Submitted Successfully");
-                    document.getElementById("myForm").reset();
-                })
-                .catch(error => {
-                    alert("Submission Failed");
-                });
-        }
-
-        function updateData() {
-
-            var formData = new FormData(document.getElementById("myForm"));
-            formData.append("action", "update");
-
-            fetch("https://script.google.com/macros/s/AKfycbwgiWM-ijnQV7lhBmzv7ILS516w-rjnY4NnZvIUlt0R8xHSwX4kGx72H_zvuyQhZHXS/exec", {
-                method: "POST",
-                body: formData
-            })
-                .then(response => response.text())
-                .then(data => {
-                    alert("Data Updated Successfully");
-                    document.getElementById("myForm").reset();
-                })
-                .catch(error => {
-                    alert("Update Failed");
-                });
-        }
-
-        function displayReport() {
-
-            document.getElementById("report").innerHTML =
-                "<h3>Processing... Please Wait</h3>";
-
-            fetch("https://script.google.com/macros/s/AKfycbwgiWM-ijnQV7lhBmzv7ILS516w-rjnY4NnZvIUlt0R8xHSwX4kGx72H_zvuyQhZHXS/exec")
-                .then(response => response.json())
-                .then(data => {
-
-                    var table = "<table border='1' cellpadding='10'>";
-                    table += "<tr><th>S.No</th><th>Name</th><th>PNO</th><th>Posting</th></tr>";
-
-                    for (var i = 0; i < data.length; i++) {
-                        table += "<tr>";
-                        table += "<td>" + (i + 1) + "</td>";
-                        table += "<td>" + data[i][0] + "</td>";
-                        table += "<td>" + data[i][1] + "</td>";
-                        table += "<td>" + data[i][2] + "</td>";
-                        table += "</tr>";
-                    }
-
-                    table += "</table>";
-
-                    document.getElementById("report").innerHTML = table;
-
-                });
-        }
-    </script>
-
+    <title>Data Entry Form with Labels</title>
 </head>
 
 <body>
 
-    <center>
+    <h2>Data Entry Form</h2>
 
-        <h2>Police Posting Form</h2>
+    <form action="#" method="post">
 
-        <form id="myForm" onsubmit="submitForm(event)">
+        <!-- Name -->
+        <label for="name">Enter your Name:</label><br>
+        <input type="text" id="name" name="name"><br><br>
 
-            <table border="1" cellpadding="10">
+        <!-- Email -->
+        <label for="email">Enter your Email:</label><br>
+        <input type="email" id="email" name="email"><br><br>
 
-                <tr>
-                    <td><b>Name:</b></td>
-                    <td><input type="text" name="name" required></td>
-                </tr>
+        <!-- Password -->
+        <label for="password">Enter your Password:</label><br>
+        <input type="password" id="password" name="password"><br><br>
 
-                <tr>
-                    <td><b>PNO:</b></td>
-                    <td><input type="number" name="pno" max="999999999" required></td>
-                </tr>
+        <!-- Message -->
+        <label for="message">Enter your Message:</label><br>
+        <textarea id="message" name="message"></textarea><br><br>
 
-                <tr>
-                    <td><b>Posting Police Station:</b></td>
-                    <td>
-                        <select name="posting" required>
-                            <option value="">Select</option>
-                            <option>Kotwali Nagar</option>
-                            <option>Cantt</option>
-                            <option>Mahila Thana</option>
-                        </select>
-                    </td>
-                </tr>
+        <!-- Buttons -->
+        <label>Submit your form:</label><br>
+        <input type="submit" value="Submit">
 
-                <tr>
-                    <td colspan="2" align="center">
-                        <input type="submit" value="Submit">
-                        <input type="button" value="Update" onclick="updateData()">
-                        <input type="reset" value="Reset">
-                        <input type="button" value="Display Report" onclick="displayReport()">
-                    </td>
-                </tr>
+        <label>Reset all fields:</label><br>
+        <input type="reset" value="Reset">
 
-            </table>
-
-        </form>
-
-        <br><br>
-
-        <div id="report"></div>
-
-    </center>
+    </form>
 
 </body>
 
