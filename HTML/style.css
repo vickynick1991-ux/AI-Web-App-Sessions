@@ -1,73 +1,78 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f6f8;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-h2 {
-    text-align: center;
-    margin-top: 30px;
-    color: #333;
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-form {
-    width: 350px;
-    margin: 30px auto;
-    padding: 25px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+.calculator {
+    background: #1e1e2f;
+    padding: 20px;
+    border-radius: 20px;
+    width: 320px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
 }
 
-label {
-    font-weight: bold;
-    color: #555;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"],
-textarea {
+#display {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-textarea {
-    resize: vertical;
-    min-height: 80px;
-}
-
-input[type="submit"],
-input[type="reset"] {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
+    height: 60px;
+    background: #111;
     border: none;
-    border-radius: 5px;
-    font-size: 15px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 26px;
+    text-align: right;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+button {
+    height: 55px;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
     cursor: pointer;
+    background: #2e2e4d;
+    color: #fff;
+    transition: 0.2s;
 }
 
-input[type="submit"] {
-    background-color: #28a745;
-    color: white;
+button:hover {
+    background: #3e3e6b;
+    transform: scale(1.05);
 }
 
-input[type="submit"]:hover {
-    background-color: #218838;
+.operator {
+    background: #ff8c00;
+    color: #fff;
 }
 
-input[type="reset"] {
-    background-color: #dc3545;
-    color: white;
+.operator:hover {
+    background: #ffa733;
 }
 
-input[type="reset"]:hover {
-    background-color: #c82333;
+.equal {
+    background: #00c853;
+}
+
+.equal:hover {
+    background: #1ee874;
+}
+
+.zero {
+    grid-column: span 2;
 }

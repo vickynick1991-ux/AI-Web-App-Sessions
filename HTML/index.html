@@ -1,42 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Data Entry Form with Labels</title>
+    <meta charset="UTF-8">
+    <title>Attractive Calculator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <h2>Data Entry Form</h2>
+    <div class="calculator">
+        <input type="text" id="display" disabled>
 
-    <form action="#" method="post">
+        <div class="buttons">
+            <button onclick="clearDisplay()" class="operator">C</button>
+            <button onclick="deleteLast()" class="operator">DEL</button>
+            <button onclick="appendValue('%')" class="operator">%</button>
+            <button onclick="appendValue('/')" class="operator">÷</button>
 
-        <!-- Name -->
-        <label for="name">Enter your Name:</label><br>
-        <input type="text" id="name" name="name"><br><br>
+            <button onclick="appendValue('7')">7</button>
+            <button onclick="appendValue('8')">8</button>
+            <button onclick="appendValue('9')">9</button>
+            <button onclick="appendValue('*')" class="operator">×</button>
 
-        <!-- Email -->
-        <label for="email">Enter your Email:</label><br>
-        <input type="email" id="email" name="email"><br><br>
+            <button onclick="appendValue('4')">4</button>
+            <button onclick="appendValue('5')">5</button>
+            <button onclick="appendValue('6')">6</button>
+            <button onclick="appendValue('-')" class="operator">−</button>
 
-        <!-- Password -->
-        <label for="password">Enter your Password:</label><br>
-        <input type="password" id="password" name="password"><br><br>
+            <button onclick="appendValue('1')">1</button>
+            <button onclick="appendValue('2')">2</button>
+            <button onclick="appendValue('3')">3</button>
+            <button onclick="appendValue('+')" class="operator">+</button>
 
-        <!-- Message -->
-        <label for="message">Enter your Message:</label><br>
-        <textarea id="message" name="message"></textarea><br><br>
+            <button onclick="appendValue('0')" class="zero">0</button>
+            <button onclick="appendValue('.')">.</button>
+            <button onclick="calculateResult()" class="equal">=</button>
+        </div>
+    </div>
 
-        <!-- Buttons -->
-        <label>Submit your form:</label><br>
-        <input type="submit" value="Submit">
-
-        <label>Reset all fields:</label><br>
-        <input type="reset" value="Reset">
-
-    </form>
-
+    <script src="script.js"></script>
 </body>
 
 </html>
