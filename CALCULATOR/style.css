@@ -13,11 +13,11 @@ body {
 }
 
 .calculator {
-    width: 360px;
-    background: #e5e5e5;
-    padding: 18px;
-    border-radius: 18px;
-    border: 6px solid #000;
+    width: 320px;
+    margin: auto;
+    padding: 15px;
+    background: #eee;
+    border-radius: 15px;
 }
 
 /* Voice status */
@@ -118,4 +118,13 @@ button:active {
 
 .zero {
     grid-column: span 2;
+}
+
+.calc-title {
+    text-align: center;
+    /* ⬅️ सबसे जरूरी */
+    margin-bottom: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #000;
 }
